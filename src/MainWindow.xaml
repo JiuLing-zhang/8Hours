@@ -15,9 +15,9 @@
         Background="White" 
         Opacity="0.5"
         Topmost="True"
-        Height="160" 
+        Height="120" 
         Width="40">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -27,6 +27,25 @@
     </Window.Resources>
 
     <StackPanel>
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="报告" Click="BtnShowReport_Click">
+                    <MenuItem.Icon>
+                        <Image Source="\Images\report_32px.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="设置" Click="BtnSetting_Click">
+                    <MenuItem.Icon>
+                        <Image Source="\Images\setting_32px.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="关闭" Click="BtnClose_Click" >
+                    <MenuItem.Icon>
+                        <Image Source="\Images\close_32px.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
         <Button Click="BtnWork_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
             <Image Source="\Images\work_40px.png"></Image>
         </Button>
@@ -35,9 +54,6 @@
         </Button>
         <Button Click="BtnIdle_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
             <Image Source="\Images\idle_40px.png"></Image>
-        </Button>
-        <Button Click="BtnMore_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
-            <Image Source="\Images\more_40px.png"></Image>
         </Button>
     </StackPanel>
 </Window>

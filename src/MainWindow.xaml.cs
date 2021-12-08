@@ -71,5 +71,19 @@ namespace _8Hours
         {
             MessageBox.Show("BtnMore_Click");
         }
+        private void BtnShowReport_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("BtnShowReport_Click");
+        }
+        private void BtnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("BtnSetting_Click");
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+     
     }
 }

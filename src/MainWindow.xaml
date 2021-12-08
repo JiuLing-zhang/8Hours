@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_8Hours"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow"
+        ShowInTaskbar="False"
+        WindowStyle="None"
+        WindowState="Normal"
+        ResizeMode="NoResize"
+        SnapsToDevicePixels="True"
+        AllowsTransparency="True" 
+        Background="White" 
+        Opacity="0.5"
+        Topmost="True"
+        Height="160" 
+        Width="40">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="\Styles\MainWindowStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
-    </Grid>
+    <StackPanel>
+        <Button Click="BtnWork_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+            <Image Source="\Images\work_40px.png"></Image>
+        </Button>
+        <Button Click="BtnStudy_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+            <Image Source="\Images\study_40px.png"></Image>
+        </Button>
+        <Button Click="BtnIdle_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+            <Image Source="\Images\idle_40px.png"></Image>
+        </Button>
+        <Button Click="BtnMore_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+            <Image Source="\Images\more_40px.png"></Image>
+        </Button>
+    </StackPanel>
 </Window>

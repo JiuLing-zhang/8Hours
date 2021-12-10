@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:_8Hours"
         mc:Ignorable="d"
         Title="MainWindow"
@@ -45,7 +46,12 @@
                 </MenuItem>
             </ContextMenu>
         </StackPanel.ContextMenu>
-        <Button Command="{Binding BtnWorkCommand}" Opacity="0.6" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+        <Button Opacity="0.6" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseMove">
+                    <local:EventCommand Command="{Binding BtnWorkCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <Image Source="\Images\work_40px.png"></Image>
         </Button>
         <Button Command="{Binding BtnStudyCommand}" Opacity="1" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">

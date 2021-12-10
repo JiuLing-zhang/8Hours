@@ -24,7 +24,11 @@ namespace _8Hours.ViewModels
             BtnShowReportCommand = new RelayCommand(o => ShowReportClick());
             BtnSettingCommand = new RelayCommand(o => SettingClick());
             BtnCloseCommand = new RelayCommand(o => CloseClick());
-            BtnWorkCommand = new RelayCommand(o => WorkClick());
+            BtnWorkCommand = new RelayCommand(o =>
+            {
+                WorkClick();
+            }
+            );
             BtnStudyCommand = new RelayCommand(o => StudyClick());
             BtnIdleCommand = new RelayCommand(o => IdleClick());
 

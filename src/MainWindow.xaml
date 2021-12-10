@@ -48,7 +48,7 @@
         </StackPanel.ContextMenu>
         <Button Opacity="0.6" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PreviewMouseMove">
+                <i:EventTrigger EventName="Click">
                     <local:EventCommand Command="{Binding BtnWorkCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>

@@ -8,15 +8,14 @@
         Title="MainWindow"
         ShowInTaskbar="False"
         WindowStyle="None"
-        WindowState="Normal"
-        ResizeMode="NoResize"
-        SnapsToDevicePixels="True"
         AllowsTransparency="True" 
-        Background="White" 
-        Opacity="0.5"
+        Background="Black"  
         Topmost="True"
-        Height="120" 
-        Width="40">
+        Height="{Binding WindowLocation.Height,Mode=TwoWay}" 
+        Width="{Binding WindowLocation.Width,Mode=TwoWay}"
+        Left="{Binding WindowLocation.Left,Mode=TwoWay}"
+        Top="{Binding WindowLocation.Top,Mode=TwoWay}"
+        >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -29,30 +28,30 @@
     <StackPanel>
         <StackPanel.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="报告" Click="BtnShowReport_Click">
+                <MenuItem Header="报告" Command="{Binding BtnShowReportCommand}">
                     <MenuItem.Icon>
                         <Image Source="\Images\report_32px.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="设置" Click="BtnSetting_Click">
+                <MenuItem Header="设置" Command="{Binding BtnSettingCommand}">
                     <MenuItem.Icon>
                         <Image Source="\Images\setting_32px.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="关闭" Click="BtnClose_Click" >
+                <MenuItem Header="关闭" Command="{Binding BtnCloseCommand}">
                     <MenuItem.Icon>
                         <Image Source="\Images\close_32px.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </ContextMenu>
         </StackPanel.ContextMenu>
-        <Button Click="BtnWork_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+        <Button Command="{Binding BtnWorkCommand}" Opacity="0.6" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
             <Image Source="\Images\work_40px.png"></Image>
         </Button>
-        <Button Click="BtnStudy_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+        <Button Command="{Binding BtnStudyCommand}" Opacity="1" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
             <Image Source="\Images\study_40px.png"></Image>
         </Button>
-        <Button Click="BtnIdle_Click" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+        <Button Command="{Binding BtnIdleCommand}" Opacity="0.6" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
             <Image Source="\Images\idle_40px.png"></Image>
         </Button>
     </StackPanel>

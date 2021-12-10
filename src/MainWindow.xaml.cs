@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _8Hours.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,14 +24,7 @@ namespace _8Hours
         public MainWindow()
         {
             InitializeComponent();
-
-            SetWindowLocation();
-        }
-        private void SetWindowLocation()
-        {
-            var workArea = System.Windows.SystemParameters.WorkArea;
-            this.Left = workArea.Right - this.Width;
-            this.Top = (workArea.Bottom - this.Height) / 2;
+            DataContext = new MainViewModel();
         }
 
         private Point startPoint;
@@ -55,35 +49,5 @@ namespace _8Hours
                 DragMove();
             }
         }
-        private void BtnWork_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("BtnWork_Click");
-        }
-        private void BtnStudy_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("study");
-        }
-        private void BtnIdle_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("BtnIdle_Click");
-        }
-        private void BtnMore_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("BtnMore_Click");
-        }
-        private void BtnShowReport_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("BtnShowReport_Click");
-        }
-        private void BtnSetting_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("BtnSetting_Click");
-        }
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-     
     }
 }

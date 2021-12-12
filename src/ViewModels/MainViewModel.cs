@@ -17,21 +17,17 @@ namespace _8Hours.ViewModels
         public ICommand BtnWorkCommand { get; set; }
         public ICommand BtnStudyCommand { get; set; }
         public ICommand BtnIdleCommand { get; set; }
-
+        public ICommand PreviewMouseMoveCommand { get; set; }
         public WindowLocationViewModel WindowLocation { get; set; }
         public MainViewModel()
         {
-            BtnShowReportCommand = new RelayCommand(o => ShowReportClick());
-            BtnSettingCommand = new RelayCommand(o => SettingClick());
-            BtnCloseCommand = new RelayCommand(o => CloseClick());
-            BtnWorkCommand = new RelayCommand(o =>
-            {
-                WorkClick();
-            }
-            );
-            BtnStudyCommand = new RelayCommand(o => StudyClick());
-            BtnIdleCommand = new RelayCommand(o => IdleClick());
-
+            BtnShowReportCommand = new RelayCommand(x => ShowReportClick());
+            BtnSettingCommand = new RelayCommand(x => SettingClick());
+            BtnCloseCommand = new RelayCommand(x => CloseClick());
+            BtnWorkCommand = new RelayCommand(x => WorkClick());
+            BtnStudyCommand = new RelayCommand(x => StudyClick());
+            BtnIdleCommand = new RelayCommand(x => IdleClick());
+            PreviewMouseMoveCommand = new RelayCommand(x => BtnPreviewMouseMove(x as MouseEventArgs));
             //Init window size
             WindowLocation = new WindowLocationViewModel()
             {
@@ -70,6 +66,18 @@ namespace _8Hours.ViewModels
         private void IdleClick()
         {
             MessageBox.Show("BtnIdle_Click");
+        }
+
+        private void BtnPreviewMouseMove(MouseEventArgs? e)
+        {
+            Window window = App.Current.MainWindow;
+            if (window != null)
+            {
+                if (Mouse.LeftButton == MouseButtonState.Pressed)
+                {
+                    window.DragMove();
+                }
+            }
         }
     }
 }

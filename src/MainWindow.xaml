@@ -12,6 +12,7 @@
         AllowsTransparency="True" 
         Background="Black"  
         Topmost="True"
+        ResizeMode="NoResize"
         Height="{Binding WindowLocation.Height,Mode=TwoWay}" 
         Width="{Binding WindowLocation.Width,Mode=TwoWay}"
         Left="{Binding WindowLocation.Left,Mode=TwoWay}"
@@ -46,18 +47,37 @@
                 </MenuItem>
             </ContextMenu>
         </StackPanel.ContextMenu>
-        <Button Opacity="0.6" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+        <Button Opacity="0.6"   Style="{StaticResource MenuButton}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <local:EventCommand Command="{Binding BtnWorkCommand}"/>
                 </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseMove">
+                    <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
+                </i:EventTrigger>
             </i:Interaction.Triggers>
             <Image Source="\Images\work_40px.png"></Image>
         </Button>
-        <Button Command="{Binding BtnStudyCommand}" Opacity="1" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+        <Button Opacity="1" Style="{StaticResource MenuButton}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <local:EventCommand Command="{Binding BtnStudyCommand}"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseMove">
+                    <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <Image Source="\Images\study_40px.png"></Image>
         </Button>
-        <Button Command="{Binding BtnIdleCommand}" Opacity="0.6" PreviewMouseMove="Btn_PreviewMouseMove" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" Style="{StaticResource MenuButton}">
+        <Button Opacity="0.6" Style="{StaticResource MenuButton}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <local:EventCommand Command="{Binding BtnIdleCommand}"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseMove">
+                    <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <Image Source="\Images\idle_40px.png"></Image>
         </Button>
     </StackPanel>

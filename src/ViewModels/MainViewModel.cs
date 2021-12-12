@@ -19,8 +19,19 @@ namespace _8Hours.ViewModels
         public ICommand BtnIdleCommand { get; set; }
         public ICommand PreviewMouseMoveCommand { get; set; }
         public WindowLocationViewModel WindowLocation { get; set; }
+        /// <summary>
+        /// mouse point
+        /// </summary>
+        public MousePointViewModel ButtonMousePoint { get; set; }
+        /// <summary>
+        /// mouse point when left button down
+        /// </summary>
+        public MousePointViewModel ButtonLeftDownMousePoint { get; set; }
         public MainViewModel()
         {
+            ButtonMousePoint = new MousePointViewModel();
+            ButtonLeftDownMousePoint = new MousePointViewModel();
+
             BtnShowReportCommand = new RelayCommand(x => ShowReportClick());
             BtnSettingCommand = new RelayCommand(x => SettingClick());
             BtnCloseCommand = new RelayCommand(x => CloseClick());
@@ -73,10 +84,20 @@ namespace _8Hours.ViewModels
             Window window = App.Current.MainWindow;
             if (window != null)
             {
-                if (Mouse.LeftButton == MouseButtonState.Pressed)
+                if (Mouse.LeftButton != MouseButtonState.Pressed)
                 {
-                    window.DragMove();
+                    return;
                 }
+
+                if (Math.Abs(ButtonMousePoint.X - ButtonLeftDownMousePoint.X) <= SystemParameters.MinimumHorizontalDragDistance)
+                {
+                    return;
+                }
+                if (Math.Abs(ButtonMousePoint.Y - ButtonLeftDownMousePoint.Y) <= SystemParameters.MinimumHorizontalDragDistance)
+                {
+                    return;
+                }
+                window.DragMove();
             }
         }
     }

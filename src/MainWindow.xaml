@@ -47,7 +47,7 @@
                 </MenuItem>
             </ContextMenu>
         </StackPanel.ContextMenu>
-        <Button Opacity="0.6"   Style="{StaticResource MenuButton}">
+        <Button Opacity="0.6" Style="{StaticResource MenuButton}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <local:EventCommand Command="{Binding BtnWorkCommand}"/>
@@ -56,6 +56,12 @@
                     <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <i:Interaction.Behaviors>
+                <local:MouseBehaviour MouseX="{Binding ButtonMousePoint.X, Mode=OneWayToSource}"
+                                      MouseY="{Binding ButtonMousePoint.Y, Mode=OneWayToSource}"
+                                      MouseLeftButtonDownX="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"
+                                      MouseLeftButtonDownY="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"/>
+            </i:Interaction.Behaviors>
             <Image Source="\Images\work_40px.png"></Image>
         </Button>
         <Button Opacity="1" Style="{StaticResource MenuButton}">
@@ -67,6 +73,12 @@
                     <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <i:Interaction.Behaviors>
+                <local:MouseBehaviour MouseX="{Binding ButtonMousePoint.X, Mode=OneWayToSource}"
+                                      MouseY="{Binding ButtonMousePoint.Y, Mode=OneWayToSource}"
+                                      MouseLeftButtonDownX="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"
+                                      MouseLeftButtonDownY="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"/>
+            </i:Interaction.Behaviors>
             <Image Source="\Images\study_40px.png"></Image>
         </Button>
         <Button Opacity="0.6" Style="{StaticResource MenuButton}">
@@ -78,6 +90,12 @@
                     <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <i:Interaction.Behaviors>
+                <local:MouseBehaviour MouseX="{Binding ButtonMousePoint.X, Mode=OneWayToSource}"
+                                      MouseY="{Binding ButtonMousePoint.Y, Mode=OneWayToSource}"
+                                      MouseLeftButtonDownX="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"
+                                      MouseLeftButtonDownY="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"/>
+            </i:Interaction.Behaviors>
             <Image Source="\Images\idle_40px.png"></Image>
         </Button>
     </StackPanel>

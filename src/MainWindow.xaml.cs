@@ -11,10 +11,17 @@ namespace _8Hours
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainViewModel _model = new();
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = _model;
+            _model.Close = Close;
+            _model.OpenReportWindow = () =>
+            {
+                var reportWindow = new ReportWindow();
+                reportWindow.ShowDialog();
+            };
         }
 
         private Point _startPoint;

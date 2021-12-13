@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -16,6 +12,8 @@ namespace _8Hours.ViewModels
 {
     internal class MainViewModel : ViewModelBase
     {
+        public Action Close { get; set; }
+        public Action OpenReportWindow { get; set; }
         public ICommand BtnShowReportCommand { get; set; }
         public ICommand BtnSettingCommand { get; set; }
         public ICommand BtnCloseCommand { get; set; }
@@ -93,7 +91,7 @@ namespace _8Hours.ViewModels
         }
         private void ShowReportClick()
         {
-            MessageBox.Show("BtnShowReport_Click");
+            OpenReportWindow();
         }
         private void SettingClick()
         {
@@ -101,7 +99,7 @@ namespace _8Hours.ViewModels
         }
         private void CloseClick()
         {
-            Application.Current.Shutdown();
+            Close();
         }
 
         private void JobStart(string jobType)

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace _8Hours.Enums
 {
-    internal enum RecordTypeEnum
+    //TODO change file name to JobTypeEnum
+    internal enum JobTypeEnum
     {
         Work = 1,
         Study = 2,

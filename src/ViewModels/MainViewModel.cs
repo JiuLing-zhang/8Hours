@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using _8Hours.Enums;
 
 namespace _8Hours.ViewModels
 {
@@ -14,31 +15,55 @@ namespace _8Hours.ViewModels
         public ICommand BtnShowReportCommand { get; set; }
         public ICommand BtnSettingCommand { get; set; }
         public ICommand BtnCloseCommand { get; set; }
-        public ICommand BtnWorkCommand { get; set; }
-        public ICommand BtnStudyCommand { get; set; }
-        public ICommand BtnIdleCommand { get; set; }
-        public ICommand PreviewMouseMoveCommand { get; set; }
+        public ICommand BtnJobStartCommand { get; set; }
         public WindowLocationViewModel WindowLocation { get; set; }
-        /// <summary>
-        /// mouse point
-        /// </summary>
-        public MousePointViewModel ButtonMousePoint { get; set; }
-        /// <summary>
-        /// mouse point when left button down
-        /// </summary>
-        public MousePointViewModel ButtonLeftDownMousePoint { get; set; }
+
+        private double _opacityBtnWork;
+        public double OpacityBtnWork
+        {
+            get => _opacityBtnWork;
+            set
+            {
+                _opacityBtnWork = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double _opacityBtnStudy;
+        public double OpacityBtnStudy
+        {
+            get => _opacityBtnStudy;
+            set
+            {
+                _opacityBtnStudy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double _opacityBtnIdle;
+        public double OpacityBtnIdle
+        {
+            get => _opacityBtnIdle;
+            set
+            {
+                _opacityBtnIdle = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MainViewModel()
         {
-            ButtonMousePoint = new MousePointViewModel();
-            ButtonLeftDownMousePoint = new MousePointViewModel();
-
-            BtnShowReportCommand = new RelayCommand(x => ShowReportClick());
-            BtnSettingCommand = new RelayCommand(x => SettingClick());
-            BtnCloseCommand = new RelayCommand(x => CloseClick());
-            BtnWorkCommand = new RelayCommand(x => WorkClick());
-            BtnStudyCommand = new RelayCommand(x => StudyClick());
-            BtnIdleCommand = new RelayCommand(x => IdleClick());
-            PreviewMouseMoveCommand = new RelayCommand(x => BtnPreviewMouseMove(x as MouseEventArgs));
+            BtnShowReportCommand = new RelayCommand(parameter => ShowReportClick());
+            BtnSettingCommand = new RelayCommand(parameter => SettingClick());
+            BtnCloseCommand = new RelayCommand(parameter => CloseClick());
+            BtnJobStartCommand = new RelayCommand(parameter =>
+            {
+                if (parameter == null)
+                {
+                    throw new ArgumentNullException(nameof(parameter));
+                }
+                JobStart(parameter.ToString());
+            });
             //Init window size
             WindowLocation = new WindowLocationViewModel()
             {
@@ -46,6 +71,8 @@ namespace _8Hours.ViewModels
                 Height = 120
             };
             InitWindowLocation();
+
+            JobStart(JobTypeEnum.Idle);
         }
 
         private void InitWindowLocation()
@@ -66,38 +93,44 @@ namespace _8Hours.ViewModels
         {
             Application.Current.Shutdown();
         }
-        private void WorkClick()
+
+        private void JobStart(string jobType)
         {
-            MessageBox.Show("BtnWork_Click");
+            var result = (JobTypeEnum)Enum.Parse(typeof(JobTypeEnum), jobType);
+            JobStart(result);
         }
-        private void StudyClick()
+        private void JobStart(JobTypeEnum jobType)
         {
-            MessageBox.Show("BtnStudy_Click");
-        }
-        private void IdleClick()
-        {
-            MessageBox.Show("BtnIdle_Click");
+            SetBtnOpacity(jobType);
         }
 
-        private void BtnPreviewMouseMove(MouseEventArgs? e)
+        private void SetBtnOpacity(JobTypeEnum jobType)
         {
-            Window window = App.Current.MainWindow;
-            if (window != null)
+            double workingOpacity = 1;
+            double idlingOpacity = 0.6;
+            if (jobType == JobTypeEnum.Work)
             {
-                if (Mouse.LeftButton != MouseButtonState.Pressed)
-                {
-                    return;
-                }
-
-                if (Math.Abs(ButtonMousePoint.X - ButtonLeftDownMousePoint.X) <= SystemParameters.MinimumHorizontalDragDistance)
-                {
-                    return;
-                }
-                if (Math.Abs(ButtonMousePoint.Y - ButtonLeftDownMousePoint.Y) <= SystemParameters.MinimumHorizontalDragDistance)
-                {
-                    return;
-                }
-                window.DragMove();
+                OpacityBtnWork = workingOpacity;
+            }
+            else
+            {
+                OpacityBtnWork = idlingOpacity;
+            }
+            if (jobType == JobTypeEnum.Study)
+            {
+                OpacityBtnStudy = workingOpacity;
+            }
+            else
+            {
+                OpacityBtnStudy = idlingOpacity;
+            }
+            if (jobType == JobTypeEnum.Idle)
+            {
+                OpacityBtnIdle = workingOpacity;
+            }
+            else
+            {
+                OpacityBtnIdle = idlingOpacity;
             }
         }
     }

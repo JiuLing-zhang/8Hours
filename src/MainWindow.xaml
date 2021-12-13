@@ -47,55 +47,28 @@
                 </MenuItem>
             </ContextMenu>
         </StackPanel.ContextMenu>
-        <Button Opacity="0.6" Style="{StaticResource MenuButton}">
+        <Button Opacity="{Binding OpacityBtnWork}" Style="{StaticResource MenuButton}" ToolTip="工作" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" PreviewMouseMove="Btn_PreviewMouseMove">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <local:EventCommand Command="{Binding BtnWorkCommand}"/>
-                </i:EventTrigger>
-                <i:EventTrigger EventName="PreviewMouseMove">
-                    <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
+                    <local:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Work"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <i:Interaction.Behaviors>
-                <local:MouseBehaviour MouseX="{Binding ButtonMousePoint.X, Mode=OneWayToSource}"
-                                      MouseY="{Binding ButtonMousePoint.Y, Mode=OneWayToSource}"
-                                      MouseLeftButtonDownX="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"
-                                      MouseLeftButtonDownY="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"/>
-            </i:Interaction.Behaviors>
             <Image Source="\Images\work_40px.png"></Image>
         </Button>
-        <Button Opacity="1" Style="{StaticResource MenuButton}">
+        <Button Opacity="{Binding OpacityBtnStudy}" Style="{StaticResource MenuButton}" ToolTip="学习" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" PreviewMouseMove="Btn_PreviewMouseMove">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <local:EventCommand Command="{Binding BtnStudyCommand}"/>
-                </i:EventTrigger>
-                <i:EventTrigger EventName="PreviewMouseMove">
-                    <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
+                    <local:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Study"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <i:Interaction.Behaviors>
-                <local:MouseBehaviour MouseX="{Binding ButtonMousePoint.X, Mode=OneWayToSource}"
-                                      MouseY="{Binding ButtonMousePoint.Y, Mode=OneWayToSource}"
-                                      MouseLeftButtonDownX="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"
-                                      MouseLeftButtonDownY="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"/>
-            </i:Interaction.Behaviors>
             <Image Source="\Images\study_40px.png"></Image>
         </Button>
-        <Button Opacity="0.6" Style="{StaticResource MenuButton}">
+        <Button Opacity="{Binding OpacityBtnIdle}" Style="{StaticResource MenuButton}" ToolTip="摸鱼" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" PreviewMouseMove="Btn_PreviewMouseMove">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <local:EventCommand Command="{Binding BtnIdleCommand}"/>
-                </i:EventTrigger>
-                <i:EventTrigger EventName="PreviewMouseMove">
-                    <local:EventCommand Command="{Binding PreviewMouseMoveCommand}"/>
+                    <local:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Idle"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <i:Interaction.Behaviors>
-                <local:MouseBehaviour MouseX="{Binding ButtonMousePoint.X, Mode=OneWayToSource}"
-                                      MouseY="{Binding ButtonMousePoint.Y, Mode=OneWayToSource}"
-                                      MouseLeftButtonDownX="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"
-                                      MouseLeftButtonDownY="{Binding ButtonLeftDownMousePoint.X, Mode=OneWayToSource}"/>
-            </i:Interaction.Behaviors>
             <Image Source="\Images\idle_40px.png"></Image>
         </Button>
     </StackPanel>

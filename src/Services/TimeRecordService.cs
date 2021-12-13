@@ -10,13 +10,23 @@ namespace _8Hours.Services
 {
     internal class TimeRecordService
     {
-        public void Add(TimeRecord item)
+        public async Task JobStart(TimeRecord item)
         {
-            using (var db = new MyDbContext())
+            await using var db = new MyDbContext();
+            db.TimeRecords.Add(item);
+            await db.SaveChangesAsync();
+        }
+
+        public async Task JobStop()
+        {
+            await using var db = new MyDbContext();
+            var item = db.TimeRecords.FirstOrDefault(x => x.EndTime == null);
+            if (item == null)
             {
-                db.TimeRecords.Add(item);
-                db.SaveChanges();
+                return;
             }
+            item.EndTime = DateTime.Now;
+            await db.SaveChangesAsync();
         }
     }
 }

@@ -27,6 +27,12 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <local:EventCommand Command="{Binding WindowClosingCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <StackPanel>
         <StackPanel.ContextMenu>
             <ContextMenu>

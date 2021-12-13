@@ -14,7 +14,7 @@ namespace _8Hours.Db
         public DbSet<TimeRecord> TimeRecords { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source=Application.db;Cache=Shared");
+            optionsBuilder.UseSqlite($"Data Source={AppContext.BaseDirectory}\\data.db3;Cache=Shared");
         }
     }
 }

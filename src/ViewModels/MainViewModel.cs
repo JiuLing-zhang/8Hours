@@ -123,10 +123,7 @@ namespace _8Hours.ViewModels
 
             new ToastContentBuilder()
                 .AddText($"开始{jobType.GetDescription()}")
-                .Show(toast =>
-                {
-                    toast.ExpirationTime = DateTime.Now.AddSeconds(3);
-                });
+                .Show();
         }
 
         private void SetBtnOpacity(JobTypeEnum jobType)

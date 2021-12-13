@@ -10,8 +10,7 @@
     <Authors>九零</Authors>
     <PackageProjectUrl>https://github.com/JiuLing-zhang/8Hours</PackageProjectUrl>
     <PackageIcon>icon_64.png</PackageIcon>
-    <Product></Product>
-    <PackageId>混日子</PackageId>
+    <Product>混子</Product>
   </PropertyGroup>
 
   <ItemGroup>

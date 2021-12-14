@@ -14,6 +14,7 @@ namespace _8Hours.ViewModels
     {
         public Action Close { get; set; }
         public Action OpenReportWindow { get; set; }
+        public Action OpenSettingWindow { get; set; }
         public ICommand BtnShowReportCommand { get; set; }
         public ICommand BtnSettingCommand { get; set; }
         public ICommand BtnCloseCommand { get; set; }
@@ -95,7 +96,7 @@ namespace _8Hours.ViewModels
         }
         private void SettingClick()
         {
-            MessageBox.Show("BtnSetting_Click");
+            OpenSettingWindow();
         }
         private void CloseClick()
         {

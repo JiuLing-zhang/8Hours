@@ -41,7 +41,7 @@
                         <Image Source="\Images\report_32px.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="设置" Command="{Binding BtnSettingCommand}" Visibility="Collapsed">
+                <MenuItem Header="设置" Command="{Binding BtnSettingCommand}">
                     <MenuItem.Icon>
                         <Image Source="\Images\setting_32px.png" />
                     </MenuItem.Icon>

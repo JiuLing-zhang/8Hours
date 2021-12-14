@@ -22,6 +22,11 @@ namespace _8Hours
                 var reportWindow = new ReportWindow();
                 reportWindow.Show();
             };
+            _model.OpenSettingWindow = () =>
+            {
+                var settingWindow = new SettingWindow();
+                settingWindow.ShowDialog();
+            };
         }
 
         private Point _startPoint;

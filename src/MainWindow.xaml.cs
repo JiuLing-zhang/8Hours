@@ -19,10 +19,7 @@ namespace _8Hours
             _model.Close = Close;
             _model.OpenReportWindow = () =>
             {
-                var reportWindow = new ReportWindow()
-                {
-                    Owner = this
-                };
+                var reportWindow = new ReportWindow();
                 reportWindow.ShowDialog();
             };
         }

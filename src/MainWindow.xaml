@@ -36,7 +36,7 @@
     <StackPanel>
         <StackPanel.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="报告" Command="{Binding BtnShowReportCommand}">
+                <MenuItem Header="统计" Command="{Binding BtnShowReportCommand}">
                     <MenuItem.Icon>
                         <Image Source="\Images\report_32px.png" />
                     </MenuItem.Icon>

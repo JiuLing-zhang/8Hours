@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using _8Hours.ViewModels;
 
 namespace _8Hours
 {
@@ -19,9 +20,13 @@ namespace _8Hours
     /// </summary>
     public partial class ReportWindow : Window
     {
+        private readonly ReportViewModel _model = new();
         public ReportWindow()
         {
             InitializeComponent();
+
+            DataContext = _model;
+            _model.Close = Close;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

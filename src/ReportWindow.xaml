@@ -4,20 +4,78 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_8Hours"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="ReportWindow" Height="450" Width="800"
-        ShowInTaskbar="False" 
         WindowStyle="None"
         BorderThickness="24"
         AllowsTransparency="True"
-        WindowStartupLocation="CenterOwner"
-        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown" 
         >
     <Window.Effect>
         <DropShadowEffect BlurRadius="24"  Direction="90" ShadowDepth="3"/>
     </Window.Effect>
 
-    <Grid>
-        <TextBlock>报告</TextBlock>
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="\Styles\ReportWindowStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <StackPanel Style="{StaticResource MainBlock}">
+        <DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">多读书，少摸鱼</TextBlock>
+                <Button Grid.Column="2" Style="{StaticResource CloseButton}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <local:EventCommand Command="{Binding BtnCloseCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Image Source="\Images\close_32px.png"></Image>
+                </Button>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <RadioButton>
+                        当天
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <local:EventCommand Command="{Binding RadioConditionIsCheckedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+                    <RadioButton>
+                        近7天
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <local:EventCommand Command="{Binding RadioConditionIsCheckedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+                    <RadioButton>
+                        近30天
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <local:EventCommand Command="{Binding RadioConditionIsCheckedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+                </StackPanel>
+                <StackPanel Grid.Row="1"></StackPanel>
+            </Grid>
+        </DockPanel>
+    </StackPanel>
 </Window>

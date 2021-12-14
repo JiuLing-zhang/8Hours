@@ -53,6 +53,14 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <RadioButton IsChecked="True">
+                    今天
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <local:EventCommand Command="{Binding RadioConditionIsCheckedCommand}" CommandParameter="1"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </RadioButton>
+                <RadioButton>
                     近7天
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">

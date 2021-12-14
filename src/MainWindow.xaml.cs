@@ -20,7 +20,7 @@ namespace _8Hours
             _model.OpenReportWindow = () =>
             {
                 var reportWindow = new ReportWindow();
-                reportWindow.ShowDialog();
+                reportWindow.Show();
             };
         }
 

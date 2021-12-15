@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:_8Hours.Commands"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:cnv="clr-namespace:_8Hours.Converters"
         mc:Ignorable="d"
         Title="SettingWindow" Height="200" Width="300"
         WindowStartupLocation="CenterScreen"
@@ -18,6 +19,7 @@
 
     <Window.Resources>
         <ResourceDictionary>
+            <cnv:WindowOrientationConverter x:Key="windowOrientationConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Styles\SettingWindowStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -51,7 +53,10 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="主窗口外观"></TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="xxx"></TextBlock>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <RadioButton Content="横向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=windowOrientationConverter}, ConverterParameter=Horizontal}" />
+                <RadioButton Content="纵向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=windowOrientationConverter}, ConverterParameter=Vertical}" />
+            </StackPanel>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="程序启动后的默认状态"></TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" Text="xxx"></TextBlock>

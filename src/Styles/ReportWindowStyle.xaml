@@ -34,12 +34,12 @@
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid>
                         <Border Name="Border" BorderThickness="0,0,0,1" CornerRadius="6,0,0,0">
-                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="2"/>
+                            <ContentPresenter x:Name="CP" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="2"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="#FFC069" />
+                            <Setter TargetName="CP" Property="TextElement.Foreground" Value="#FFC069"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

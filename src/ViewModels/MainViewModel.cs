@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
+using _8Hours.Commands;
 using _8Hours.Enums;
 using _8Hours.Models;
 using _8Hours.Services;

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:local="clr-namespace:_8Hours"
+        xmlns:c="clr-namespace:_8Hours.Commands"
         mc:Ignorable="d"
         Title="MainWindow"
         ShowInTaskbar="False"
@@ -29,7 +29,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
-            <local:EventCommand Command="{Binding WindowClosingCommand}"/>
+            <c:EventCommand Command="{Binding WindowClosingCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -56,7 +56,7 @@
         <Button Opacity="{Binding OpacityBtnWork}" Style="{StaticResource MenuButton}" ToolTip="工作" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" PreviewMouseMove="Btn_PreviewMouseMove">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <local:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Work"/>
+                    <c:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Work"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <Image Source="\Images\work_40px.png"></Image>
@@ -64,7 +64,7 @@
         <Button Opacity="{Binding OpacityBtnStudy}" Style="{StaticResource MenuButton}" ToolTip="学习" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" PreviewMouseMove="Btn_PreviewMouseMove">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <local:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Study"/>
+                    <c:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Study"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <Image Source="\Images\study_40px.png"></Image>
@@ -72,7 +72,7 @@
         <Button Opacity="{Binding OpacityBtnIdle}" Style="{StaticResource MenuButton}" ToolTip="摸鱼" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" PreviewMouseMove="Btn_PreviewMouseMove">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <local:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Idle"/>
+                    <c:EventCommand Command="{Binding BtnJobStartCommand}" CommandParameter="Idle"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <Image Source="\Images\idle_40px.png"></Image>

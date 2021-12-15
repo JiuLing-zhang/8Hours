@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:_8Hours"
+        xmlns:c="clr-namespace:_8Hours.Commands"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
@@ -38,7 +38,7 @@
             <Button Grid.Column="2" Style="{StaticResource CloseButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <local:EventCommand Command="{Binding BtnCloseCommand}"/>
+                        <c:EventCommand Command="{Binding BtnCloseCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <Image Source="\Images\close_32px.png"></Image>

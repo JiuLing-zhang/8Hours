@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace _8Hours
+namespace _8Hours.Commands
 {
     internal class RelayCommand : ICommand
     {

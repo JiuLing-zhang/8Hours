@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Xaml.Behaviors;
 
-namespace _8Hours
+namespace _8Hours.Commands
 {
     //Event binding,Reference https://www.bbsmax.com/A/o75NmD9KJW/
     internal class EventCommand : TriggerAction<DependencyObject>

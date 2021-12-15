@@ -5,6 +5,14 @@
         <Setter Property="Margin" Value="10"></Setter>
     </Style>
 
+    <Style x:Key="TopGrid" TargetType="Grid">
+        <Setter Property="Margin" Value="0,0,0,5"></Setter>
+    </Style>
+    <Style x:Key="WindowTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16"></Setter>
+        <Setter Property="Foreground" Value="#CF7C72"></Setter>
+    </Style>
+
     <Style x:Key="CloseButton" TargetType="Button" BasedOn="{StaticResource BtnMouseOverOpacity}">
         <Setter Property="Background" Value="red"></Setter>
         <Setter Property="Width" Value="20"></Setter>

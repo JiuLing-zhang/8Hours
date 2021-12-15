@@ -25,13 +25,13 @@
     </Window.Resources>
 
     <DockPanel Style="{StaticResource MainBlock}">
-        <Grid DockPanel.Dock="Top">
+        <Grid DockPanel.Dock="Top" Style="{StaticResource TopGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0">设置</TextBlock>
+            <TextBlock Grid.Column="0" Style="{StaticResource WindowTitle}">设置</TextBlock>
             <Button Grid.Column="2" Style="{StaticResource CloseButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">

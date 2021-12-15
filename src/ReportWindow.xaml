@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_8Hours"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="ReportWindow" Height="450" Width="800"
         WindowStyle="None"
@@ -13,6 +13,7 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Background="#EFEFEF"
         >
     <Window.Effect>
         <DropShadowEffect BlurRadius="24"  Direction="90" ShadowDepth="3"/>
@@ -33,7 +34,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Style="{StaticResource TxtTips}">多读书，少摸鱼</TextBlock>
+            <TextBlock Grid.Column="0" Style="{StaticResource TxtTips}">少摸鱼，多读书</TextBlock>
             <Button Grid.Column="2" Style="{StaticResource CloseButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
@@ -43,48 +44,42 @@
                 <Image Source="\Images\close_32px.png"></Image>
             </Button>
         </Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <RadioButton IsChecked="True">
-                    今天
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <local:EventCommand Command="{Binding RadioConditionIsCheckedCommand}" CommandParameter="1"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </RadioButton>
-                <RadioButton>
-                    近7天
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <local:EventCommand Command="{Binding RadioConditionIsCheckedCommand}" CommandParameter="7"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </RadioButton>
-                <RadioButton>
-                    近30天
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <local:EventCommand Command="{Binding RadioConditionIsCheckedCommand}" CommandParameter="30"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </RadioButton>
-            </StackPanel>
-            <DockPanel Grid.Row="1">
-                <wpf:CartesianChart Series="{Binding SeriesCollection}"
-                                    LegendLocation="Top">
-                    <wpf:CartesianChart.AxisX>
-                        <wpf:Axis Title="日期"></wpf:Axis>
-                    </wpf:CartesianChart.AxisX>
-                    <wpf:CartesianChart.AxisY>
-                        <wpf:Axis Title="时间(分钟)"></wpf:Axis>
-                    </wpf:CartesianChart.AxisY>
-                </wpf:CartesianChart>
-            </DockPanel>
-        </Grid>
+        <StackPanel x:Name="MainPanel">
+            <TabControl Style="{StaticResource TabControl}" SelectedIndex="{Binding TabReportSelected}" >
+
+                <TabItem Header="今天" Style="{StaticResource TabItem}">
+                    <lvc:PieChart Series="{Binding TodayCollection}" Style="{StaticResource ReportPieChart}">
+                        <lvc:PieChart.ChartLegend>
+                            <lvc:DefaultLegend BulletSize="10"></lvc:DefaultLegend>
+                        </lvc:PieChart.ChartLegend>
+                        <lvc:PieChart.DataTooltip>
+                            <lvc:DefaultTooltip BulletSize="5"></lvc:DefaultTooltip>
+                        </lvc:PieChart.DataTooltip>
+                    </lvc:PieChart>
+                </TabItem>
+
+                <TabItem Header="昨天" Style="{StaticResource TabItem}">
+                    <lvc:PieChart Series="{Binding YesterdayCollection}" Style="{StaticResource ReportPieChart}">
+                        <lvc:PieChart.ChartLegend>
+                            <lvc:DefaultLegend BulletSize="10"></lvc:DefaultLegend>
+                        </lvc:PieChart.ChartLegend>
+                        <lvc:PieChart.DataTooltip>
+                            <lvc:DefaultTooltip BulletSize="5"></lvc:DefaultTooltip>
+                        </lvc:PieChart.DataTooltip>
+                    </lvc:PieChart>
+                </TabItem>
+
+                <TabItem Header="最近一周" Style="{StaticResource TabItem}">
+                    <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Top">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="日期"></lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="时间(分钟)"></lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
     </DockPanel>
 </Window>

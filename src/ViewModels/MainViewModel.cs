@@ -127,8 +127,8 @@ namespace _8Hours.ViewModels
 
         private void SetBtnOpacity(JobTypeEnum jobType)
         {
-            double workingOpacity = 1;
-            double idlingOpacity = 0.6;
+            double workingOpacity = 0.4;
+            double idlingOpacity = 1;
             if (jobType == JobTypeEnum.Work)
             {
                 OpacityBtnWork = workingOpacity;

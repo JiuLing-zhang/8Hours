@@ -24,8 +24,13 @@ namespace _8Hours
         public SettingWindow()
         {
             InitializeComponent();
-            Content = _model;
+            DataContext = _model;
             _model.Close += Close;
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

@@ -12,7 +12,7 @@
         BorderThickness="24"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
-        MouseDown="Window_MouseDown" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         >
     <Window.Effect>
         <DropShadowEffect BlurRadius="24"  Direction="90" ShadowDepth="3"/>
@@ -27,13 +27,13 @@
     </Window.Resources>
 
     <DockPanel Style="{StaticResource MainBlock}">
-        <Grid DockPanel.Dock="Top">
+        <Grid DockPanel.Dock="Top" Style="{StaticResource TopGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0">多读书，少摸鱼</TextBlock>
+            <TextBlock Grid.Column="0" Style="{StaticResource TxtTips}">多读书，少摸鱼</TextBlock>
             <Button Grid.Column="2" Style="{StaticResource CloseButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">

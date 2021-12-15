@@ -7,7 +7,11 @@
         xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="SettingWindow" Height="450" Width="800">
+        Title="SettingWindow" Height="200" Width="300"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        ResizeMode="NoResize">
 
     <Window.Effect>
         <DropShadowEffect BlurRadius="24"  Direction="90" ShadowDepth="3"/>
@@ -37,6 +41,21 @@
                 </i:Interaction.Triggers>
                 <Image Source="\Images\close_32px.png"></Image>
             </Button>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="主窗口外观"></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="xxx"></TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="程序启动后的默认状态"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="xxx"></TextBlock>
         </Grid>
     </DockPanel>
 </Window>

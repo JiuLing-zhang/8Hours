@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using _8Hours.Commands;
+using _8Hours.Configs;
 using _8Hours.Enums;
 using _8Hours.Models;
 using _8Hours.Services;
@@ -71,6 +72,8 @@ namespace _8Hours.ViewModels
         private readonly TimeRecordService _timeRecordService;
         public MainViewModel()
         {
+            _timeRecordService = new TimeRecordService();
+
             BtnShowReportCommand = new RelayCommand(parameter => ShowReportClick());
             BtnSettingCommand = new RelayCommand(parameter => SettingClick());
             BtnCloseCommand = new RelayCommand(parameter => CloseClick());
@@ -91,23 +94,42 @@ namespace _8Hours.ViewModels
             BtnJobStopCommand = new RelayCommand(parameter => JobStop());
             WindowClosingCommand = new RelayCommand(async parameter => await WindowClosing());
 
-            //Init window size
-            WindowLocation = new WindowLocationViewModel()
-            {
-                Width = 40,
-                Height = 160
-            };
-            InitWindowLocation();
+            WindowLocation = new WindowLocationViewModel();
 
-            _timeRecordService = new TimeRecordService();
-            JobStart(JobTypeEnum.Idle);
+            InitWindowSize();
+            InitWindowLocation();
+            InitJobType();
         }
 
+        private void InitWindowSize()
+        {
+            switch (GlobalConfig.App.WindowOrientation)
+            {
+                case WindowOrientationEnum.Horizontal:
+                    WindowLocation.Width = 160;
+                    WindowLocation.Height = 40;
+                    break;
+                case WindowOrientationEnum.Vertical:
+                    WindowLocation.Width = 40;
+                    WindowLocation.Height = 160;
+                    break;
+            }
+        }
         private void InitWindowLocation()
         {
             var workArea = System.Windows.SystemParameters.WorkArea;
             WindowLocation.Left = workArea.Right - WindowLocation.Width;
             WindowLocation.Top = (workArea.Bottom - WindowLocation.Height) / 2;
+        }
+
+        private void InitJobType()
+        {
+            if (GlobalConfig.App.JobType == null)
+            {
+                JobStop();
+                return;
+            }
+            JobStart(GlobalConfig.App.JobType.Value);
         }
         private void ShowReportClick()
         {

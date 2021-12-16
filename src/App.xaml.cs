@@ -15,6 +15,5 @@ namespace _8Hours
     public partial class App : Application
     {
 
-       
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using _8Hours.Commands;
+using _8Hours.Configs;
 using _8Hours.Enums;
 
 namespace _8Hours.ViewModels
@@ -40,6 +41,8 @@ namespace _8Hours.ViewModels
         {
             BtnCloseCommand = new RelayCommand(parameter => CloseClick());
 
+            WindowOrientation = GlobalConfig.App.WindowOrientation;
+            DefaultJobType = GlobalConfig.App.JobType;
         }
         private void CloseClick()
         {
@@ -48,12 +51,14 @@ namespace _8Hours.ViewModels
 
         private void WindowOrientationChanged(WindowOrientationEnum windowOrientation)
         {
-            Console.WriteLine($"WindowOrientationChanged You selected {windowOrientation}");
+            GlobalConfig.App.WindowOrientation = windowOrientation;
+            GlobalConfig.SaveConfig();
         }
 
         private void DefaultJobTypeChanged(JobTypeEnum? defaultJobType)
         {
-            Console.WriteLine($"DefaultJobType You selected {defaultJobType}");
+            GlobalConfig.App.JobType = defaultJobType;
+            GlobalConfig.SaveConfig();
         }
     }
 }

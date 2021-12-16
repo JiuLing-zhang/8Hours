@@ -69,6 +69,17 @@ namespace _8Hours.ViewModels
             }
         }
 
+        private string _windowOrientation = null!;
+        public string WindowOrientation
+        {
+            get => _windowOrientation;
+            set
+            {
+                _windowOrientation = value;
+                OnPropertyChanged();
+            }
+        }
+
         private readonly TimeRecordService _timeRecordService;
         public MainViewModel()
         {
@@ -96,6 +107,7 @@ namespace _8Hours.ViewModels
 
             WindowLocation = new WindowLocationViewModel();
 
+            WindowOrientation = GlobalConfig.App.WindowOrientation.ToString();
             InitWindowSize();
             InitWindowLocation();
             InitJobType();
@@ -118,8 +130,17 @@ namespace _8Hours.ViewModels
         private void InitWindowLocation()
         {
             var workArea = System.Windows.SystemParameters.WorkArea;
-            WindowLocation.Left = workArea.Right - WindowLocation.Width;
-            WindowLocation.Top = (workArea.Bottom - WindowLocation.Height) / 2;
+            switch (GlobalConfig.App.WindowOrientation)
+            {
+                case WindowOrientationEnum.Horizontal:
+                    WindowLocation.Left = (workArea.Right - WindowLocation.Width) / 2;
+                    WindowLocation.Top = 0;
+                    break;
+                case WindowOrientationEnum.Vertical:
+                    WindowLocation.Left = workArea.Right - WindowLocation.Width;
+                    WindowLocation.Top = (workArea.Bottom - WindowLocation.Height) / 2;
+                    break;
+            }
         }
 
         private void InitJobType()

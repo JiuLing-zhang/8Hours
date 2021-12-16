@@ -35,18 +35,19 @@ namespace _8Hours.Configs
                 }
                 return _app ?? throw new ArgumentNullException(nameof(App));
             }
-            set
+            set => _app = value;
+        }
+
+        public static void SaveConfig()
+        {
+            try
             {
-                _app = value;
-                try
-                {
-                    string json = System.Text.Json.JsonSerializer.Serialize(value);
-                    System.IO.File.WriteAllText(ConfigPath, json);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Config file save failed.");
-                }
+                string json = System.Text.Json.JsonSerializer.Serialize(App);
+                System.IO.File.WriteAllText(ConfigPath, json);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Config file save failed.");
             }
         }
     }

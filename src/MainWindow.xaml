@@ -33,7 +33,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <StackPanel>
+    <StackPanel Orientation="{Binding WindowOrientation}">
         <StackPanel.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="统计" Command="{Binding BtnShowReportCommand}">

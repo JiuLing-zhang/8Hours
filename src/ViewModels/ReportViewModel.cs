@@ -131,7 +131,7 @@ namespace _8Hours.ViewModels
                             jobTotalHours += x.EndTime.Value.Subtract(x.BeginTime).TotalSeconds / 60 / 60;
                         }
                     });
-                    chartValue.Add(new ObservablePoint(i, Convert.ToInt32(jobTotalHours)));
+                    chartValue.Add(new ObservablePoint(i, Math.Round(jobTotalHours, 2)));
                 }
 
                 series.Add(new LineSeries()

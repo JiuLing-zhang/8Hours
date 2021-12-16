@@ -6,15 +6,16 @@ namespace _8Hours.Models
 {
     internal class JobReport
     {
-        public List<DateReport> DayReport { get; set; }
+        public List<DateReport> DayReport { get; set; } = null!;
     }
     internal class DateReport
     {
         /// <summary>
         /// format yyyy-MM-dd
         /// </summary>
-        public string Day { get; set; }
-        public JobReportDetail Details { get; set; }
+        public string Day { get; set; } = null!;
+
+        public JobReportDetail Details { get; set; } = null!;
     }
 
     internal class JobReportDetail

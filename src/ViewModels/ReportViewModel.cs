@@ -27,10 +27,11 @@ namespace _8Hours.ViewModels
                 TabReportSelectionChanged(value);
             }
         }
-        public Action Close { get; set; }
+
+        public Action Close { get; set; } = null!;
         public ICommand BtnCloseCommand { get; set; }
 
-        private SeriesCollection _seriesCollection;
+        private SeriesCollection _seriesCollection = null!;
         public SeriesCollection SeriesCollection
         {
             get => _seriesCollection;
@@ -41,7 +42,7 @@ namespace _8Hours.ViewModels
             }
         }
 
-        private SeriesCollection _todayCollection;
+        private SeriesCollection _todayCollection = null!;
         public SeriesCollection TodayCollection
         {
             get => _todayCollection;
@@ -52,7 +53,7 @@ namespace _8Hours.ViewModels
             }
         }
 
-        private SeriesCollection _yesterdayCollection;
+        private SeriesCollection _yesterdayCollection = null!;
         public SeriesCollection YesterdayCollection
         {
             get => _yesterdayCollection;
@@ -121,11 +122,14 @@ namespace _8Hours.ViewModels
                 for (int i = 0; i < dayInterval; i++)
                 {
                     string date = DateTime.Now.AddDays(0 - i).ToString("yyyy-MM-dd");
-                    var dayDetail = oneTypeJobDetail.Where(x => x.EndTime.Value.ToString("yyyy-MM-dd") == date).ToList();
+                    var dayDetail = oneTypeJobDetail.Where(x => x.EndTime != null && x.EndTime.Value.ToString("yyyy-MM-dd") == date).ToList();
                     double jobTotalHours = 0;
                     dayDetail.ForEach(x =>
                     {
-                        jobTotalHours += x.EndTime.Value.Subtract(x.BeginTime).TotalSeconds / 60 / 60;
+                        if (x.EndTime != null)
+                        {
+                            jobTotalHours += x.EndTime.Value.Subtract(x.BeginTime).TotalSeconds / 60 / 60;
+                        }
                     });
                     chartValue.Add(new ObservablePoint(i, Convert.ToInt32(jobTotalHours)));
                 }
@@ -180,7 +184,10 @@ namespace _8Hours.ViewModels
                 double jobTotalHours = 0;
                 oneTypeJobDetail.ForEach(x =>
                 {
-                    jobTotalHours += x.EndTime.Value.Subtract(x.BeginTime).TotalSeconds / 60 / 60;
+                    if (x.EndTime != null)
+                    {
+                        jobTotalHours += x.EndTime.Value.Subtract(x.BeginTime).TotalSeconds / 60 / 60;
+                    }
 
                 });
                 series.Add(new PieSeries()

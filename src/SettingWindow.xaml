@@ -50,7 +50,7 @@
             <StackPanel>
                 <TextBlock Text="主窗口外观" Style="{StaticResource SettingType}"></TextBlock>
                 <StackPanel Style="{StaticResource SettingContent}">
-                    <RadioButton Style="{StaticResource SettingRadio}" GroupName="WindowOrientationGroup" Content="横向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=OrientationConverter}, ConverterParameter=Horizontal}" />
+                    <RadioButton Style="{StaticResource SettingRadio}" GroupName="WindowOrientationGroup" Content="横向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=OrientationConverter}}" />
                     <RadioButton Style="{StaticResource SettingRadio}" GroupName="WindowOrientationGroup" Content="纵向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=OrientationConverter}, ConverterParameter=Vertical}" />
                 </StackPanel>
             </StackPanel>

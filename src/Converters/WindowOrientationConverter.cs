@@ -11,7 +11,7 @@ namespace _8Hours.Converters
 {
     public class WindowOrientationConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value == null || parameter == null)
             {
@@ -25,7 +25,7 @@ namespace _8Hours.Converters
             return true;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value == null || (bool)value == false || parameter == null)
             {

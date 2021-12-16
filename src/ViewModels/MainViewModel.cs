@@ -12,13 +12,14 @@ namespace _8Hours.ViewModels
 {
     internal class MainViewModel : ViewModelBase
     {
-        public Action Close { get; set; }
-        public Action OpenReportWindow { get; set; }
-        public Action OpenSettingWindow { get; set; }
+        public Action Close { get; set; } = null!;
+        public Action OpenReportWindow { get; set; } = null!;
+        public Action OpenSettingWindow { get; set; } = null!;
         public ICommand BtnShowReportCommand { get; set; }
         public ICommand BtnSettingCommand { get; set; }
         public ICommand BtnCloseCommand { get; set; }
         public ICommand BtnJobStartCommand { get; set; }
+        public ICommand BtnJobStopCommand { get; set; }
         public ICommand WindowClosingCommand { get; set; }
 
         public WindowLocationViewModel WindowLocation { get; set; }
@@ -56,6 +57,17 @@ namespace _8Hours.ViewModels
             }
         }
 
+        private double _opacityBtnStop;
+        public double OpacityBtnStop
+        {
+            get => _opacityBtnStop;
+            set
+            {
+                _opacityBtnStop = value;
+                OnPropertyChanged();
+            }
+        }
+
         private readonly TimeRecordService _timeRecordService;
         public MainViewModel()
         {
@@ -68,15 +80,22 @@ namespace _8Hours.ViewModels
                 {
                     throw new ArgumentNullException(nameof(parameter));
                 }
-                JobStart(parameter.ToString());
+                string parameterString = parameter.ToString() ?? throw new ArgumentNullException(nameof(parameter));
+                if (!Enum.TryParse(parameterString, out JobTypeEnum jobType))
+                {
+                    throw new ArgumentNullException(nameof(parameter));
+                }
+                JobStart(jobType);
+
             });
-            WindowClosingCommand = new RelayCommand(parameter => WindowClosing());
+            BtnJobStopCommand = new RelayCommand(parameter => JobStop());
+            WindowClosingCommand = new RelayCommand(async parameter => await WindowClosing());
 
             //Init window size
             WindowLocation = new WindowLocationViewModel()
             {
                 Width = 40,
-                Height = 120
+                Height = 160
             };
             InitWindowLocation();
 
@@ -103,14 +122,9 @@ namespace _8Hours.ViewModels
             Close();
         }
 
-        private void JobStart(string jobType)
-        {
-            var result = (JobTypeEnum)Enum.Parse(typeof(JobTypeEnum), jobType);
-            JobStart(result);
-        }
         private async void JobStart(JobTypeEnum jobType)
         {
-            SetBtnOpacity(jobType);
+            SetActiveStartOpacity(jobType);
             await _timeRecordService.JobStop();
             var item = new TimeRecord()
             {
@@ -125,34 +139,54 @@ namespace _8Hours.ViewModels
                 .Show();
         }
 
-        private void SetBtnOpacity(JobTypeEnum jobType)
+        private async void JobStop()
         {
-            double workingOpacity = 0.4;
-            double idlingOpacity = 1;
+            SetActiveStopOpacity();
+            await _timeRecordService.JobStop();
+            new ToastContentBuilder()
+                .AddText($"停止记录")
+                .Show();
+        }
+
+        private void SetActiveStartOpacity(JobTypeEnum jobType)
+        {
+            double activeOpacity = 0.4;
+            double InactiveOpacity = 1;
+            OpacityBtnStop = InactiveOpacity;
             if (jobType == JobTypeEnum.Work)
             {
-                OpacityBtnWork = workingOpacity;
+                OpacityBtnWork = activeOpacity;
             }
             else
             {
-                OpacityBtnWork = idlingOpacity;
+                OpacityBtnWork = InactiveOpacity;
             }
             if (jobType == JobTypeEnum.Study)
             {
-                OpacityBtnStudy = workingOpacity;
+                OpacityBtnStudy = activeOpacity;
             }
             else
             {
-                OpacityBtnStudy = idlingOpacity;
+                OpacityBtnStudy = InactiveOpacity;
             }
             if (jobType == JobTypeEnum.Idle)
             {
-                OpacityBtnIdle = workingOpacity;
+                OpacityBtnIdle = activeOpacity;
             }
             else
             {
-                OpacityBtnIdle = idlingOpacity;
+                OpacityBtnIdle = InactiveOpacity;
             }
+        }
+        private void SetActiveStopOpacity()
+        {
+            double activeOpacity = 0.4;
+            double InactiveOpacity = 1;
+
+            OpacityBtnWork = InactiveOpacity;
+            OpacityBtnStudy = InactiveOpacity;
+            OpacityBtnIdle = InactiveOpacity;
+            OpacityBtnStop = activeOpacity;
         }
 
         private async Task WindowClosing()

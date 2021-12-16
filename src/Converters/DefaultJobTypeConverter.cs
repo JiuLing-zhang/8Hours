@@ -8,14 +8,14 @@ namespace _8Hours.Converters
 {
     internal class DefaultJobTypeConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (parameter == null)
             {
                 return false;
             }
 
-            string uiParameter = parameter.ToString();
+            string uiParameter = parameter.ToString() ?? throw new ArgumentNullException(nameof(parameter));
             if (value == null)
             {
                 if (uiParameter.IsEmpty())
@@ -33,14 +33,14 @@ namespace _8Hours.Converters
             return true;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value == null || (bool)value == false || parameter == null)
             {
                 return null;
             }
 
-            string uiParameter = parameter.ToString();
+            string uiParameter = parameter.ToString() ?? throw new ArgumentNullException(nameof(parameter));
             if (uiParameter.IsEmpty())
             {
                 return null;

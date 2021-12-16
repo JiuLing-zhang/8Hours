@@ -22,6 +22,7 @@
     <None Remove="Images\more_40px.png" />
     <None Remove="Images\report_32px.png" />
     <None Remove="Images\setting_32px.png" />
+    <None Remove="Images\stop_40px.png" />
     <None Remove="Images\study_40px.png" />
     <None Remove="Images\work_40px.png" />
   </ItemGroup>
@@ -46,6 +47,7 @@
     <Resource Include="Images\more_40px.png" />
     <Resource Include="Images\report_32px.png" />
     <Resource Include="Images\setting_32px.png" />
+    <Resource Include="Images\stop_40px.png" />
     <Resource Include="Images\study_40px.png" />
     <Resource Include="Images\work_40px.png" />
   </ItemGroup>

@@ -7,7 +7,7 @@ namespace _8Hours.ViewModels
 {
     internal class SettingViewModel : ViewModelBase
     {
-        public Action Close { get; set; }
+        public Action Close { get; set; } = null!;
         public ICommand BtnCloseCommand { get; set; }
 
         private WindowOrientationEnum _windowOrientation;

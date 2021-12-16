@@ -77,5 +77,13 @@
             </i:Interaction.Triggers>
             <Image Source="\Images\idle_40px.png"></Image>
         </Button>
+        <Button Opacity="{Binding OpacityBtnStop}" Style="{StaticResource MenuButton}" ToolTip="停止" PreviewMouseLeftButtonDown="Btn_PreviewMouseLeftButtonDown" PreviewMouseMove="Btn_PreviewMouseMove">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <c:EventCommand Command="{Binding BtnJobStopCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Image Source="\Images\stop_40px.png"></Image>
+        </Button>
     </StackPanel>
 </Window>

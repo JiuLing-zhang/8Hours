@@ -11,7 +11,7 @@ namespace _8Hours.Db
 {
     internal class MyDbContext : DbContext
     {
-        public DbSet<TimeRecord> TimeRecords { get; set; }
+        public DbSet<TimeRecord> TimeRecords { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source={AppContext.BaseDirectory}\\data.db3;Cache=Shared");

@@ -19,21 +19,41 @@ namespace _8Hours.ViewModels
                 _windowOrientation = value;
                 OnPropertyChanged();
 
-                Change(value);
+                WindowOrientationChanged(value);
             }
         }
+
+        private JobTypeEnum? _defaultJobType;
+        public JobTypeEnum? DefaultJobType
+        {
+            get => _defaultJobType;
+            set
+            {
+                _defaultJobType = value;
+                OnPropertyChanged();
+
+                DefaultJobTypeChanged(value);
+            }
+        }
+
         internal SettingViewModel()
         {
             BtnCloseCommand = new RelayCommand(parameter => CloseClick());
+
         }
         private void CloseClick()
         {
             Close();
         }
 
-        private void Change(WindowOrientationEnum xx)
+        private void WindowOrientationChanged(WindowOrientationEnum windowOrientation)
         {
-            Console.WriteLine($"You selected {xx}");
+            Console.WriteLine($"WindowOrientationChanged You selected {windowOrientation}");
+        }
+
+        private void DefaultJobTypeChanged(JobTypeEnum? defaultJobType)
+        {
+            Console.WriteLine($"DefaultJobType You selected {defaultJobType}");
         }
     }
 }

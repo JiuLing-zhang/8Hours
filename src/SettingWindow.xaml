@@ -7,11 +7,13 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:cnv="clr-namespace:_8Hours.Converters"
         mc:Ignorable="d"
-        Title="SettingWindow" Height="200" Width="300"
+        Title="SettingWindow" Height="200" Width="200"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="#EFEFEF"
+        >
 
     <Window.Effect>
         <DropShadowEffect BlurRadius="24"  Direction="90" ShadowDepth="3"/>
@@ -19,7 +21,8 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <cnv:WindowOrientationConverter x:Key="windowOrientationConverter"/>
+            <cnv:WindowOrientationConverter x:Key="OrientationConverter"/>
+            <cnv:DefaultJobTypeConverter x:Key="JobTypeConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Styles\SettingWindowStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -33,7 +36,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Style="{StaticResource WindowTitle}">设置</TextBlock>
+            <TextBlock Grid.Column="0" Style="{StaticResource WindowTitle}" Text="设置"></TextBlock>
             <Button Grid.Column="2" Style="{StaticResource CloseButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
@@ -43,23 +46,23 @@
                 <Image Source="\Images\close_32px.png"></Image>
             </Button>
         </Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="主窗口外观"></TextBlock>
-            <StackPanel Grid.Row="0" Grid.Column="1">
-                <RadioButton Content="横向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=windowOrientationConverter}, ConverterParameter=Horizontal}" />
-                <RadioButton Content="纵向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=windowOrientationConverter}, ConverterParameter=Vertical}" />
+        <StackPanel>
+            <StackPanel>
+                <TextBlock Text="主窗口外观" Style="{StaticResource SettingType}"></TextBlock>
+                <StackPanel Style="{StaticResource SettingContent}">
+                    <RadioButton Style="{StaticResource SettingRadio}" GroupName="WindowOrientationGroup" Content="横向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=OrientationConverter}, ConverterParameter=Horizontal}" />
+                    <RadioButton Style="{StaticResource SettingRadio}" GroupName="WindowOrientationGroup" Content="纵向" IsChecked="{Binding WindowOrientation, Converter={StaticResource ResourceKey=OrientationConverter}, ConverterParameter=Vertical}" />
+                </StackPanel>
             </StackPanel>
-
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="程序启动后的默认状态"></TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="xxx"></TextBlock>
-        </Grid>
+            <StackPanel>
+                <TextBlock Text="程序启动后的默认状态" Style="{StaticResource SettingType}"></TextBlock>
+                <StackPanel Style="{StaticResource SettingContent}">
+                    <RadioButton Style="{StaticResource SettingRadio}" GroupName="JobTypeGroup" Content="工作" IsChecked="{Binding DefaultJobType, Converter={StaticResource ResourceKey=JobTypeConverter}, ConverterParameter=Work}" />
+                    <RadioButton Style="{StaticResource SettingRadio}" GroupName="JobTypeGroup" Content="学习" IsChecked="{Binding DefaultJobType, Converter={StaticResource ResourceKey=JobTypeConverter}, ConverterParameter=Study}" />
+                    <RadioButton Style="{StaticResource SettingRadio}" GroupName="JobTypeGroup" Content="摸鱼" IsChecked="{Binding DefaultJobType, Converter={StaticResource ResourceKey=JobTypeConverter}, ConverterParameter=Idle}" />
+                    <RadioButton Style="{StaticResource SettingRadio}" GroupName="JobTypeGroup" Content="无" IsChecked="{Binding DefaultJobType, Converter={StaticResource ResourceKey=JobTypeConverter}, ConverterParameter=''}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </DockPanel>
 </Window>

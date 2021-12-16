@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Style="{StaticResource TxtTips}">少摸鱼，多读书</TextBlock>
+            <TextBlock Grid.Column="0" Style="{StaticResource TxtTips}" Text="少摸鱼，多读书"></TextBlock>
             <Button Grid.Column="2" Style="{StaticResource CloseButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">

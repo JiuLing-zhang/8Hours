@@ -31,17 +31,6 @@ namespace _8Hours.ViewModels
         public Action Close { get; set; } = null!;
         public ICommand BtnCloseCommand { get; set; }
 
-        private SeriesCollection _seriesCollection = null!;
-        public SeriesCollection SeriesCollection
-        {
-            get => _seriesCollection;
-            set
-            {
-                _seriesCollection = value;
-                OnPropertyChanged();
-            }
-        }
-
         private SeriesCollection _todayCollection = null!;
         public SeriesCollection TodayCollection
         {
@@ -60,6 +49,49 @@ namespace _8Hours.ViewModels
             set
             {
                 _yesterdayCollection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private SeriesCollection _lastWeekCollection = null!;
+        public SeriesCollection LastWeekCollection
+        {
+            get => _lastWeekCollection;
+            set
+            {
+                _lastWeekCollection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private SeriesCollection _lastMonthCollection = null!;
+        public SeriesCollection LastMonthCollection
+        {
+            get => _lastMonthCollection;
+            set
+            {
+                _lastMonthCollection = value;
+                OnPropertyChanged();
+            }
+        }
+        private IList<string> _lastWeekTitle = null!;
+        public IList<string> LastWeekTitle
+        {
+            get => _lastWeekTitle;
+            set
+            {
+                _lastWeekTitle = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private IList<string> _lastMonthTitle = null!;
+        public IList<string> LastMonthTitle
+        {
+            get => _lastMonthTitle;
+            set
+            {
+                _lastMonthTitle = value;
                 OnPropertyChanged();
             }
         }
@@ -89,60 +121,19 @@ namespace _8Hours.ViewModels
                     QueryYesterdayReportData();
                     break;
                 case 2:
-                    ConditionIsChecked(7);
+                    QueryLastWeekReportData();
+                    break;
+                case 3:
+                    QueryLastMonthReportData();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(tabIndex));
             }
         }
 
-        private async void ConditionIsChecked(int dayInterval)
-        {
-            DateTime beginTime = Convert.ToDateTime(DateTime.Now.AddDays(0 - dayInterval).ToString("yyyy-MM-dd 00:00:00"));
-            DateTime endTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 23:59:59"));
-            var jobDetail = await GetJobDetailList(beginTime, endTime);
-
-            SeriesCollection = BuildJobReport(dayInterval, jobDetail);
-        }
-
         private async Task<List<TimeRecord>> GetJobDetailList(DateTime beginTime, DateTime endTime)
         {
             return await _timeRecordService.GetJobDetail(beginTime, endTime);
-        }
-
-        private SeriesCollection BuildJobReport(int dayInterval, List<TimeRecord> jobDetail)
-        {
-            var series = new SeriesCollection();
-            foreach (int jobType in Enum.GetValues(typeof(JobTypeEnum)))
-            {
-                var currentJobType = (JobTypeEnum)jobType;
-                var oneTypeJobDetail = GetOneTypeJobDetail(jobDetail, currentJobType);
-
-                var chartValue = new ChartValues<ObservablePoint>();
-                for (int i = 0; i < dayInterval; i++)
-                {
-                    string date = DateTime.Now.AddDays(0 - i).ToString("yyyy-MM-dd");
-                    var dayDetail = oneTypeJobDetail.Where(x => x.EndTime != null && x.EndTime.Value.ToString("yyyy-MM-dd") == date).ToList();
-                    double jobTotalHours = 0;
-                    dayDetail.ForEach(x =>
-                    {
-                        if (x.EndTime != null)
-                        {
-                            jobTotalHours += x.EndTime.Value.Subtract(x.BeginTime).TotalSeconds / 60 / 60;
-                        }
-                    });
-                    chartValue.Add(new ObservablePoint(i, Math.Round(jobTotalHours, 2)));
-                }
-
-                series.Add(new LineSeries()
-                {
-                    Title = currentJobType.GetDescription(),
-                    PointGeometrySize = 10,
-                    Values = chartValue
-                });
-            }
-
-            return series;
         }
 
         private List<TimeRecord> GetOneTypeJobDetail(List<TimeRecord> jobDetail, JobTypeEnum jobType)
@@ -198,6 +189,87 @@ namespace _8Hours.ViewModels
                     LabelPoint = chartPoint => $"{chartPoint.Y}小时 ({chartPoint.Participation:P})"
                 });
             }
+            return series;
+        }
+
+        private async void QueryLastWeekReportData()
+        {
+            BuildLastWeekTitle();
+            LastWeekCollection = await QueryTotalDaysTimeRecord(7);
+        }
+
+        private async void QueryLastMonthReportData()
+        {
+            BuildLastMonthTitle();
+            LastMonthCollection = await QueryTotalDaysTimeRecord(30);
+        }
+
+        private void BuildLastWeekTitle()
+        {
+            int totalDays = 7;
+            LastWeekTitle = new List<string>();
+            //这里少取一天的星期值，最后一天使用“今天”表示
+            for (int i = totalDays; i > 1; i--)
+            {
+                string dayOfWeekName =
+                    System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.AddDays(1 - i).DayOfWeek);
+                LastWeekTitle.Add(dayOfWeekName);
+            }
+            LastWeekTitle.Add("今天");
+        }
+
+        private void BuildLastMonthTitle()
+        {
+            int totalDays = 30;
+            LastMonthTitle = new List<string>();
+            //这里少取一天的日期，最后一天使用“今天”表示
+            for (int i = totalDays; i > 1; i--)
+            {
+                string monthAndDay = DateTime.Now.AddDays(1 - i).ToString("MM-dd");
+                LastMonthTitle.Add(monthAndDay);
+            }
+            LastMonthTitle.Add("今天");
+        }
+        private async Task<SeriesCollection> QueryTotalDaysTimeRecord(int totalDays)
+        {
+            DateTime beginTime = Convert.ToDateTime(DateTime.Now.AddDays(1 - totalDays).ToString("yyyy-MM-dd 00:00:00"));
+            DateTime endTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 23:59:59"));
+            var jobDetail = await GetJobDetailList(beginTime, endTime);
+            return BuildCartesianChartReport(totalDays, jobDetail);
+        }
+
+        private SeriesCollection BuildCartesianChartReport(int totalDays, List<TimeRecord> jobDetail)
+        {
+            var series = new SeriesCollection();
+            foreach (int jobType in Enum.GetValues(typeof(JobTypeEnum)))
+            {
+                var currentJobType = (JobTypeEnum)jobType;
+                var oneTypeJobDetail = GetOneTypeJobDetail(jobDetail, currentJobType);
+
+                var chartValue = new ChartValues<ObservablePoint>();
+                for (int i = 0; i < totalDays; i++)
+                {
+                    string date = DateTime.Now.AddDays(i - totalDays + 1).ToString("yyyy-MM-dd");
+                    var dayDetail = oneTypeJobDetail.Where(x => x.EndTime != null && x.EndTime.Value.ToString("yyyy-MM-dd") == date).ToList();
+                    double jobTotalHours = 0;
+                    dayDetail.ForEach(x =>
+                    {
+                        if (x.EndTime != null)
+                        {
+                            jobTotalHours += x.EndTime.Value.Subtract(x.BeginTime).TotalSeconds / 60 / 60;
+                        }
+                    });
+                    chartValue.Add(new ObservablePoint(i, Math.Round(jobTotalHours, 2)));
+                }
+
+                series.Add(new LineSeries()
+                {
+                    Title = currentJobType.GetDescription(),
+                    PointGeometrySize = 10,
+                    Values = chartValue
+                });
+            }
+
             return series;
         }
     }

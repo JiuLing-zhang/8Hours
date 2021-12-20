@@ -7,17 +7,14 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:cnv="clr-namespace:_8Hours.Converters"
         mc:Ignorable="d"
-        Title="SettingWindow" Height="200" Width="200"
-        WindowStartupLocation="CenterScreen"
+        Title="SettingWindow" Height="220" Width="220"
         WindowStyle="None"
+        BorderThickness="10"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        ResizeMode="NoResize"
         Background="#EFEFEF"
         >
-
-    <Window.Effect>
-        <DropShadowEffect BlurRadius="24"  Direction="90" ShadowDepth="3"/>
-    </Window.Effect>
 
     <Window.Resources>
         <ResourceDictionary>
@@ -28,6 +25,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="10"  Direction="0" ShadowDepth="1"/>
+    </Window.Effect>
 
     <DockPanel Style="{StaticResource MainBlock}">
         <Grid DockPanel.Dock="Top" Style="{StaticResource TopGrid}">

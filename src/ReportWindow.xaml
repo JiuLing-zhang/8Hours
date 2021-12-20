@@ -15,9 +15,6 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Background="#EFEFEF"
         >
-    <Window.Effect>
-        <DropShadowEffect BlurRadius="24"  Direction="90" ShadowDepth="3"/>
-    </Window.Effect>
 
     <Window.Resources>
         <ResourceDictionary>
@@ -26,6 +23,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="24" Direction="90" ShadowDepth="3"/>
+    </Window.Effect>
 
     <DockPanel Style="{StaticResource MainBlock}">
         <Grid DockPanel.Dock="Top" Style="{StaticResource TopGrid}">
@@ -75,7 +76,7 @@
                             <lvc:Axis Labels="{Binding LastWeekTitle}"></lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="时长(分钟)"></lvc:Axis>
+                            <lvc:Axis Title="时长(小时)"></lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
                 </TabItem>
@@ -86,7 +87,7 @@
                             <lvc:Axis Labels="{Binding LastMonthTitle}"></lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="时长(分钟)"></lvc:Axis>
+                            <lvc:Axis Title="时长(小时)"></lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
                 </TabItem>

@@ -17,4 +17,5 @@ The function will set main window's orientation,default job state when applicati
 ## 报表统计 The Report window
 程序包含今天、昨天、最近一周、最近一月的统计数据
 8Hours contains today's,yesterday's,last week's,and last month's report.  
+![8Hours-report2.png](https://s2.loli.net/2021/12/20/mSowk25PhUYX7su.png)  
 ![8Hours-report.png](https://s2.loli.net/2021/12/20/LBO3IUsYD1fKAGq.png)  

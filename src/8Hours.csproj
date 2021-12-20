@@ -25,10 +25,14 @@
     <None Remove="Images\stop_40px.png" />
     <None Remove="Images\study_40px.png" />
     <None Remove="Images\work_40px.png" />
+    <None Remove="首次运行请看这里！！！.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Images\icon.ico" />
+    <Content Include="首次运行请看这里！！！.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
